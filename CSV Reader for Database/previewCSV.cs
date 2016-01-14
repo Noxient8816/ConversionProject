@@ -185,5 +185,10 @@ namespace CSV_Reader_for_Database
         {
             
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //easwrawerawe
+        }
     }
 }
