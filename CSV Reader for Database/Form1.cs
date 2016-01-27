@@ -24,12 +24,12 @@ namespace CSV_Reader_for_Database
             filePath.AutoCompleteSource = AutoCompleteSource.FileSystem;
             filePath.AutoCompleteMode = AutoCompleteMode.Suggest;
 
-            DTAcctLog.Columns.Add("unique_id", typeof(int));
-            DTAcctLog.Columns.Add("repuid", typeof(int));
-            DTAcctLog.Columns.Add("memid", typeof(int));
-            DTAcctLog.Columns.Add("start_time", typeof(DateTime));
-            DTAcctLog.Columns.Add("endtime", typeof(DateTime));
-            DTAcctLog.Columns.Add("Module", typeof(char));
+            DTAcctLog.Columns.Add("unique_id");//, typeof(int));
+            DTAcctLog.Columns.Add("repuid");//, typeof(int));
+            DTAcctLog.Columns.Add("memid");//, typeof(int));
+            DTAcctLog.Columns.Add("start_time");//, typeof(DateTime));
+            DTAcctLog.Columns.Add("endtime");//, typeof(DateTime));
+            DTAcctLog.Columns.Add("Module");//, typeof(char));
             DTAcctLog.Columns.Add("numchanged", typeof(int));
 
             dataGridView1.DataSource = DTAcctLog; // initialize the datagridview so you can see that shit and make sure it's working.
@@ -68,7 +68,7 @@ namespace CSV_Reader_for_Database
                 {
                    
                     var row = csvData.Read();
-                    //if (row = row.Empty)
+                    //if (row = row.Empty) //attemping to handle nulls - if I figure something out this can be deleted. 
                     //{
 
                     //}
@@ -78,7 +78,16 @@ namespace CSV_Reader_for_Database
                     }
                     
                     resultsTest.Text = row[0] + " " + row[1] + " " + row[2] + " " + row[3];
-                    DTAcctLog.Rows.Add(row[0], row[1], row[2]);
+                    foreach (string element in row)
+                    {
+                        DTAcctLog.Rows.Add(element);
+
+                       
+                    }
+                   
+
+                   //DTAcctLog.Rows.Add(row[0], row[1], row[2], row[0]);
+                   //DTAcctLog.Rows.Add(row[0], row[1], row[2], row[0]); //each row add propagates the columns for the row in order. A new row add row method will start a new row.
                     dataGridView1.Refresh(); //refresh the data grid view when you grab fresh data. 
                 }
                 
