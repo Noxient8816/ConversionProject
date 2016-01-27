@@ -68,10 +68,10 @@ namespace CSV_Reader_for_Database
                 {
                    
                     var row = csvData.Read();
-                    if (row = row.Empty)
-                    {
+                    //if (row = row.Empty)
+                    //{
 
-                    }
+                    //}
                     if (row == null)
                     {
                         break;
@@ -93,7 +93,7 @@ namespace CSV_Reader_for_Database
                 
             }
             //DTAcctLog.Rows.Add(1, 2);
-           
+            //git test
             //dataGridView1.Refresh(); //refresh the data grid view when you grab fresh data. 
 
 
