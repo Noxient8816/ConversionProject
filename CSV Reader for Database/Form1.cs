@@ -44,7 +44,7 @@ namespace CSV_Reader_for_Database
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
+       { 
             // Show the dialog and get result.
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK) // Test result.
@@ -68,26 +68,32 @@ namespace CSV_Reader_for_Database
                 {
                    
                     var row = csvData.Read();
+                    if (row = row.Empty)
+                    {
+
+                    }
                     if (row == null)
                     {
                         break;
                     }
+                    
                     resultsTest.Text = row[0] + " " + row[1] + " " + row[2] + " " + row[3];
-
+                    DTAcctLog.Rows.Add(row[0], row[1], row[2]);
+                    dataGridView1.Refresh(); //refresh the data grid view when you grab fresh data. 
                 }
                 
                
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                
                 MessageBoxHelper.PrepToCenterMessageBoxOnForm(this);
-                MessageBox.Show("You fucked up");
+                MessageBox.Show("You fucked up\n" + ex.Message);
                 
             }
             //DTAcctLog.Rows.Add(1, 2);
-            
+           
             //dataGridView1.Refresh(); //refresh the data grid view when you grab fresh data. 
 
 
