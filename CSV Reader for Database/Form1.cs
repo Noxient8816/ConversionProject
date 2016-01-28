@@ -30,7 +30,12 @@ namespace CSV_Reader_for_Database
             DTAcctLog.Columns.Add("start_time");//, typeof(DateTime));
             DTAcctLog.Columns.Add("endtime");//, typeof(DateTime));
             DTAcctLog.Columns.Add("Module");//, typeof(char));
-            DTAcctLog.Columns.Add("numchanged", typeof(int));
+            DTAcctLog.Columns.Add("numchanged");//, typeof(int));
+            DTAcctLog.Columns.Add("numchanged1");//, typeof(int));
+            DTAcctLog.Columns.Add("numchanged2");//, typeof(int));
+            DTAcctLog.Columns.Add("numchanged3");//, typeof(int));
+            DTAcctLog.Columns.Add("numchanged4");//, typeof(int));
+            DTAcctLog.Columns.Add("numchanged5");//, typeof(int));
 
             dataGridView1.DataSource = DTAcctLog; // initialize the datagridview so you can see that shit and make sure it's working.
 
@@ -77,13 +82,14 @@ namespace CSV_Reader_for_Database
                         break;
                     }
                     
-                    resultsTest.Text = row[0] + " " + row[1] + " " + row[2] + " " + row[3];
-                    foreach (string element in row)
-                    {
-                        DTAcctLog.Rows.Add(element);
+                    //resultsTest.Text = row[0] + " " + row[1] + " " + row[2] + " " + row[3];
+                    //foreach (string element in row) I might want this later - I like this.
+                    //{     }
 
-                       
-                    }
+                    DTAcctLog.Rows.Add(row);
+
+
+                    
                    
 
                    //DTAcctLog.Rows.Add(row[0], row[1], row[2], row[0]);
