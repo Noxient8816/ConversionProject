@@ -10,15 +10,21 @@ using System.Windows.Forms;
 using System.IO;
 using CsvHelper;
 using System.Diagnostics;
+using iAnywhere.Data.SQLAnywhere;
 
 namespace CSV_Reader_for_Database
 {
     public partial class Form1 : Form
     {
+        
+        
         DataTable DTAcctLog = new DataTable("AcctLog");
+        
 
         public Form1()
         {
+
+            
             InitializeComponent();
             TheDataTables TDT = new TheDataTables();
             filePath.AutoCompleteSource = AutoCompleteSource.FileSystem;
@@ -142,6 +148,31 @@ namespace CSV_Reader_for_Database
 
 
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            string connectionString = connStr.Text.Trim();
+            try
+            {
+                
+                using (SAConnection conn = new SAConnection(connectionString)) //open the connection to the database with the connection string
+                {
+                    conn.Open();
+                    SADataAdapter da = new SADataAdapter("Select * from members where memnum like '999000'", conn);
+                    da.Fill(DTAcctLog);
+                    dataGridView1.DataSource = DTAcctLog;
+                    dataGridView1.Refresh();
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBoxHelper.PrepToCenterMessageBoxOnForm(this);
+                MessageBox.Show("Error");
+
+            }
+            
         }
     }
 }

@@ -37,6 +37,12 @@
       <HintPath>..\packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="iAnywhere.Data.AsaClient">
+      <HintPath>..\iAnywhere.Data.AsaClient.dll</HintPath>
+    </Reference>
+    <Reference Include="iAnywhere.Data.SQLAnywhere">
+      <HintPath>..\iAnywhere.Data.SQLAnywhere.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
