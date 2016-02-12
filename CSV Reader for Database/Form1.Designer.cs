@@ -43,6 +43,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.connStr = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.sendtoDB = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -94,11 +95,11 @@
             // 
             // convertCSV
             // 
-            this.convertCSV.Location = new System.Drawing.Point(414, 194);
+            this.convertCSV.Location = new System.Drawing.Point(415, 88);
             this.convertCSV.Name = "convertCSV";
             this.convertCSV.Size = new System.Drawing.Size(75, 35);
             this.convertCSV.TabIndex = 4;
-            this.convertCSV.Text = "Convert CSV";
+            this.convertCSV.Text = "Table Tree (Usable?)";
             this.convertCSV.UseVisualStyleBackColor = true;
             this.convertCSV.Click += new System.EventHandler(this.convertCSV_Click);
             // 
@@ -183,11 +184,23 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "ConnStr:  eng=Database Name;uid=clubuser;pwd=Password;links=tcp";
             // 
+            // sendtoDB
+            // 
+            this.sendtoDB.Location = new System.Drawing.Point(333, 236);
+            this.sendtoDB.Name = "sendtoDB";
+            this.sendtoDB.Size = new System.Drawing.Size(75, 38);
+            this.sendtoDB.TabIndex = 12;
+            this.sendtoDB.Text = "Send Table to DB";
+            this.sendtoDB.UseVisualStyleBackColor = true;
+            this.sendtoDB.Visible = false;
+            this.sendtoDB.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1318, 473);
+            this.Controls.Add(this.sendtoDB);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.connStr);
             this.Controls.Add(this.button1);
@@ -229,6 +242,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox connStr;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button sendtoDB;
     }
 }
 
