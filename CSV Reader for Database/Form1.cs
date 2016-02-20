@@ -134,18 +134,19 @@ namespace CSV_Reader_for_Database
                 using (SAConnection conn = new SAConnection(connectionString)) //open the connection to the database with the connection string
                 {
                     conn.Open();
-                    SADataAdapter da = new SADataAdapter();
+                    SADataAdapter da = new SADataAdapter("select * from acctlog" ,conn);
                     SACommandBuilder cb = new SACommandBuilder(da);
-                    DataRow newRow = DTAcctLog.NewRow();
+                    da.Fill(DTAcctLog);
+                    da.Update(DTAcctLog);
 
                     
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBoxHelper.PrepToCenterMessageBoxOnForm(this);
-                MessageBox.Show("Error");
+                MessageBox.Show("Error\n" + ex.Message);
 
             }
 
