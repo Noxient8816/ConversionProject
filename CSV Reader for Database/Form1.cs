@@ -19,8 +19,8 @@ namespace CSV_Reader_for_Database
         
         
         DataTable DTAcctLog = new DataTable("AcctLog");
+        DataSet dSet = new DataSet();
         
-
         public Form1()
         {
 
@@ -68,7 +68,7 @@ namespace CSV_Reader_for_Database
 
         private void button2_Click(object sender, EventArgs e) //assign elements button
         {
-           
+            
             
             try
             {
@@ -127,19 +127,24 @@ namespace CSV_Reader_for_Database
         }
         private void button2_Click_1(object sender, EventArgs e) //send to DB
         {
+            
             string connectionString = connStr.Text.Trim();
             try
             {
 
-                using (SAConnection conn = new SAConnection(connectionString)) //open the connection to the database with the connection string
+                using (SAConnection conn = new SAConnection(connectionString)) //DataTable Tester
                 {
                     conn.Open();
-                    SADataAdapter da = new SADataAdapter("select * from acctlog" ,conn);
+                    
+                    SADataAdapter da = new SADataAdapter("select * from acctlog", conn);
                     SACommandBuilder cb = new SACommandBuilder(da);
                     da.Fill(DTAcctLog);
                     da.Update(DTAcctLog);
 
-                    
+
+
+
+
                 }
 
             }
@@ -183,29 +188,70 @@ namespace CSV_Reader_for_Database
         
         private void button1_Click_1(object sender, EventArgs e)
         {
+            dataGridView1.DataSource = null;
             string connectionString = connStr.Text.Trim();
             try
             {
-                
-                using (SAConnection conn = new SAConnection(connectionString)) //open the connection to the database with the connection string
+               using (SAConnection conn = new SAConnection(connectionString)) //DataSet tester
                 {
-                    conn.Open();
-                    SADataAdapter da = new SADataAdapter("Select * from members where memnum like '999000'", conn);
+                    conn.Open(); //open connection from using block
+                    SADataAdapter da = new SADataAdapter(); //create a new data adapter. I don't know what's special about this. 
+                    da.SelectCommand = new SACommand("Select * from AcctLog", conn);
+                    dataGridView1.DataSource = DTAcctLog;
+                    SACommandBuilder cb = new SACommandBuilder(da);
                     da.Fill(DTAcctLog);
-                    //dataGridView1.DataSource = DTAcctLog; // if you don't set this datasource here, the query will take forever to run 
-                    dataGridView1.Refresh();
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBoxHelper.PrepToCenterMessageBoxOnForm(this);
-                MessageBox.Show("Error");
+                MessageBox.Show("Error\n" + ex.Message); 
 
             }
+            finally
+            {
+                dataGridView1.Refresh();
+            }
+
             
         }
 
-       
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+            string connectionString = connStr.Text.Trim();
+            try
+            {
+
+                using (SAConnection conn = new SAConnection(connectionString)) //DataSet tester
+                {
+                    DTAcctLog.Rows.Clear();
+                    conn.Open(); //open connection from using block
+                    SADataAdapter da = new SADataAdapter("Select * from acctlog", conn); //create a new data adapter. I don't know what's special about this. 
+                    SACommandBuilder cb = new SACommandBuilder(da);
+                    da.Fill(DTAcctLog);
+                    DTAcctLog.Rows[4]["repuid"] = 2000002;
+                    da.UpdateCommand = cb.GetUpdateCommand();
+                    da.Update(DTAcctLog);
+
+
+
+
+                    dataGridView1.DataSource = DTAcctLog;
+                    da.Fill(DTAcctLog);
+                    
+                    
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBoxHelper.PrepToCenterMessageBoxOnForm(this);
+                MessageBox.Show("Error\n" + ex.Message + "\n\n" + ex.ToString() );
+
+            }
+        }
+
+
     }
 }
