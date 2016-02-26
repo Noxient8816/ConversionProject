@@ -44,6 +44,7 @@
             this.connStr = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.sendtoDB = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -87,9 +88,9 @@
             // 
             this.preview.Location = new System.Drawing.Point(333, 192);
             this.preview.Name = "preview";
-            this.preview.Size = new System.Drawing.Size(75, 37);
+            this.preview.Size = new System.Drawing.Size(100, 37);
             this.preview.TabIndex = 3;
-            this.preview.Text = "Assign Array Elements";
+            this.preview.Text = "Read from CSV @ File Path";
             this.preview.UseVisualStyleBackColor = true;
             this.preview.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -163,7 +164,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 9;
-            this.button1.Text = "Send Table";
+            this.button1.Text = "Load DGV1";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -188,18 +189,31 @@
             // 
             this.sendtoDB.Location = new System.Drawing.Point(333, 236);
             this.sendtoDB.Name = "sendtoDB";
-            this.sendtoDB.Size = new System.Drawing.Size(75, 38);
+            this.sendtoDB.Size = new System.Drawing.Size(100, 38);
             this.sendtoDB.TabIndex = 12;
             this.sendtoDB.Text = "Send Table to DB";
             this.sendtoDB.UseVisualStyleBackColor = true;
             this.sendtoDB.Visible = false;
             this.sendtoDB.Click += new System.EventHandler(this.button2_Click_1);
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Red;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Location = new System.Drawing.Point(96, 383);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "Update DB";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1318, 473);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.sendtoDB);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.connStr);
@@ -243,6 +257,7 @@
         private System.Windows.Forms.TextBox connStr;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button sendtoDB;
+        private System.Windows.Forms.Button button2;
     }
 }
 
