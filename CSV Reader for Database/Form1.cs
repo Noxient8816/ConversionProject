@@ -225,20 +225,23 @@ namespace CSV_Reader_for_Database
 
                 using (SAConnection conn = new SAConnection(connectionString)) //DataSet tester
                 {
-                    DTAcctLog.Rows.Clear();
+                    DTAcctLog.Rows.Clear(); //doesn't affect the update.
                     conn.Open(); //open connection from using block
                     SADataAdapter da = new SADataAdapter("Select * from acctlog", conn); //create a new data adapter. I don't know what's special about this. 
                     SACommandBuilder cb = new SACommandBuilder(da);
-                    da.Fill(DTAcctLog);
-                    DTAcctLog.Rows[4]["repuid"] = 2000002;
+                    cb.ConflictOption = ConflictOption.OverwriteChanges; //cheaty bullshit for just overpowering the conflict changes negating the concurrency violation.
+                    da.Fill(DTAcctLog); //you have to fill it to update it. 
+                    DTAcctLog.Rows[4]["repuid"] = 2000042;
+                    DTAcctLog.Rows[5]["repuid"] = 2000032;
+                    DTAcctLog.Rows[6]["repuid"] = 2000012;
+                    DTAcctLog.Rows[7]["repuid"] = 2000015;
+                    DTAcctLog.Rows[8]["repuid"] = 2000017;
+                    DTAcctLog.Rows[9]["repuid"] = 2000025;
                     da.UpdateCommand = cb.GetUpdateCommand();
                     da.Update(DTAcctLog);
-
-
-
-
+                    DTAcctLog.AcceptChanges();
                     dataGridView1.DataSource = DTAcctLog;
-                    da.Fill(DTAcctLog);
+                    //da.Fill(DTAcctLog);
                     
                     
                 }
