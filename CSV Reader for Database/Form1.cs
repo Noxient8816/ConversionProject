@@ -127,6 +127,7 @@ namespace CSV_Reader_for_Database
         }
         private void button2_Click_1(object sender, EventArgs e) //send to DB
         {
+            
             string connectionString = connStr.Text.Trim();
             try
             {
@@ -134,12 +135,16 @@ namespace CSV_Reader_for_Database
                 using (SAConnection conn = new SAConnection(connectionString)) //open the connection to the database with the connection string
                 {
                     conn.Open();
-                    SADataAdapter da = new SADataAdapter("select * from acctlog" ,conn);
+                    
+                    SADataAdapter da = new SADataAdapter("select * from acctlog", conn);
                     SACommandBuilder cb = new SACommandBuilder(da);
                     da.Fill(DTAcctLog);
                     da.Update(DTAcctLog);
 
-                    
+
+
+
+
                 }
 
             }
