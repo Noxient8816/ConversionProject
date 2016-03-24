@@ -16,8 +16,6 @@ namespace CSV_Reader_for_Database
 {
     public partial class Form1 : Form
     {
-        //butts
-        
         DataTable DTAcctLog = new DataTable("AcctLog");
         DataSet dSet = new DataSet();
         
@@ -30,22 +28,24 @@ namespace CSV_Reader_for_Database
             filePath.AutoCompleteSource = AutoCompleteSource.FileSystem;
             filePath.AutoCompleteMode = AutoCompleteMode.Suggest;
             #region TABLES
-            DTAcctLog.Columns.Add("unique_id");//, typeof(int));
-            DTAcctLog.Columns.Add("repuid");//, typeof(int));
-            DTAcctLog.Columns.Add("memid");//, typeof(int));
-            DTAcctLog.Columns.Add("start_time");//, typeof(DateTime));
-            DTAcctLog.Columns.Add("endtime");//, typeof(DateTime));
-            DTAcctLog.Columns.Add("Module");//, typeof(char));
-            DTAcctLog.Columns.Add("numchanged");//, typeof(int));
-            DTAcctLog.Columns.Add("numchanged1");//, typeof(int));
-            DTAcctLog.Columns.Add("numchanged2");//, typeof(int));
-            DTAcctLog.Columns.Add("numchanged3");//, typeof(int));
-            DTAcctLog.Columns.Add("numchanged4");//, typeof(int));
-            DTAcctLog.Columns.Add("numchanged5");//, typeof(int));
-            #endregion
-             // initialize the datagridview so you can see that shit and make sure it's working.
+            //HEY - This is stupid. You did bad here. It's easier to query the DB to get the table schema, and then update the DataTable that you dump that query in to.
 
-            
+            //DTAcctLog.Columns.Add("unique_id");//, typeof(int));
+            //DTAcctLog.Columns.Add("repuid");//, typeof(int));
+            //DTAcctLog.Columns.Add("memid");//, typeof(int));
+            //DTAcctLog.Columns.Add("start_time");//, typeof(DateTime));
+            //DTAcctLog.Columns.Add("endtime");//, typeof(DateTime));
+            //DTAcctLog.Columns.Add("Module");//, typeof(char));
+            //DTAcctLog.Columns.Add("numchanged");//, typeof(int)); //this is the last column the test CSV needs.
+            //DTAcctLog.Columns.Add("numchanged1");//, typeof(int));
+            //DTAcctLog.Columns.Add("numchanged2");//, typeof(int));
+            //DTAcctLog.Columns.Add("numchanged3");//, typeof(int));
+            //DTAcctLog.Columns.Add("numchanged4");//, typeof(int));
+            //DTAcctLog.Columns.Add("numchanged5");//, typeof(int));
+            #endregion
+            // initialize the datagridview so you can see that shit and make sure it's working.
+
+
 
         }
 
@@ -68,7 +68,10 @@ namespace CSV_Reader_for_Database
 
         private void button2_Click(object sender, EventArgs e) //assign elements button
         {
-            
+            /*Need to add some sort of for each loop incorporating the CSV file that'll add a column for 
+            each element of data. 
+            */
+            int i = 0;
             
             try
             {
@@ -78,32 +81,27 @@ namespace CSV_Reader_for_Database
                 dataGridView1.DataSource = DTAcctLog;
                 while (true)
                 {
-                   
+                  
+                    
                     var row = csvData.Read();
-                    //if (row = row.Empty) //attemping to handle nulls - if I figure something out this can be deleted. 
-                    //{
-
-                    //}
+                    
                     if (row == null)
                     {
                         break;
                     }
-                    
-                    //resultsTest.Text = row[0] + " " + row[1] + " " + row[2] + " " + row[3];
-                    //foreach (string element in row) I might want this later - I like this.
-                    //{     }
 
                     
+                   while (i < row.Length)
+                    {
+                        DTAcctLog.Columns.Add(String.Format("Column {0}", (i + 1))); //fancy way of doing it.
+                        //DTAcctLog.Columns.Add("Column " + (i+1)); //what I did originally and still works fine for this application
+                        i++;
+                    }
+
                     DTAcctLog.Rows.Add(row);
 
+                    Debug.WriteLine("Row Length: {0:C2}\n Iteration: {1}", row.Length, i);
 
-
-
-
-
-                    //DTAcctLog.Rows.Add(row[0], row[1], row[2], row[0]);
-                    //DTAcctLog.Rows.Add(row[0], row[1], row[2], row[0]); //each row add propagates the columns for the row in order. A new row add row method will start a new row.
-                    
                     dataGridView1.Refresh(); //refresh the data grid view when you grab fresh data. 
                     sendtoDB.Show();
                 }
@@ -231,12 +229,12 @@ namespace CSV_Reader_for_Database
                     SACommandBuilder cb = new SACommandBuilder(da);
                     cb.ConflictOption = ConflictOption.OverwriteChanges; //cheaty bullshit for just overpowering the conflict changes negating the concurrency violation.
                     da.Fill(DTAcctLog); //you have to fill it to update it. 
-                    DTAcctLog.Rows[4]["repuid"] = 2000042;
-                    DTAcctLog.Rows[5]["repuid"] = 2000032;
-                    DTAcctLog.Rows[6]["repuid"] = 2000012;
-                    DTAcctLog.Rows[7]["repuid"] = 2000015;
-                    DTAcctLog.Rows[8]["repuid"] = 2000017;
-                    DTAcctLog.Rows[9]["repuid"] = 2000025;
+                    DTAcctLog.Rows[0]["unique_id"] = 1;
+                    DTAcctLog.Rows[0]["repuid"] = 2000032;
+                    DTAcctLog.Rows[0]["memid"] = 200001159;
+                    //DTAcctLog.Rows[0]["start_time"] = "2015-08-17 08:44:23.052";
+                    //DTAcctLog.Rows[0]["repuid"] = 2000017;
+                    //DTAcctLog.Rows[0]["repuid"] = 2000025;
                     da.UpdateCommand = cb.GetUpdateCommand();
                     da.Update(DTAcctLog);
                     DTAcctLog.AcceptChanges();
@@ -255,6 +253,32 @@ namespace CSV_Reader_for_Database
             }
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string tabDelimiter = "\t";
+            string strID, strName, strStatus;
+            using (GenericParser parser = new GenericParser())
+            {
+                parser.SetDataSource(filePath.Text);
 
+                parser.ColumnDelimiter = tabDelimiter.ToCharArray();
+                parser.FirstRowHasHeader = true;
+                //parser.SkipStartingDataRows = ;
+                parser.MaxBufferSize = 4096;
+                parser.MaxRows = 500;
+                parser.TextQualifier = '\"';
+
+                while (parser.Read())
+                {
+                    strID = parser["ID"];
+                    strName = parser["Potato"];
+                    strStatus = parser["Reading"];
+
+                    
+                }
+
+
+            }
+        }
     }
 }

@@ -37,21 +37,20 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
             this.filePath = new System.Windows.Forms.TextBox();
-            this.resultsTest = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.connStr = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.sendtoDB = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // browsePath
             // 
-            this.browsePath.Location = new System.Drawing.Point(415, 36);
+            this.browsePath.Location = new System.Drawing.Point(211, 88);
             this.browsePath.Name = "browsePath";
             this.browsePath.Size = new System.Drawing.Size(75, 23);
             this.browsePath.TabIndex = 0;
@@ -65,7 +64,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1318, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(897, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -86,7 +85,7 @@
             // 
             // preview
             // 
-            this.preview.Location = new System.Drawing.Point(333, 192);
+            this.preview.Location = new System.Drawing.Point(12, 144);
             this.preview.Name = "preview";
             this.preview.Size = new System.Drawing.Size(100, 37);
             this.preview.TabIndex = 3;
@@ -96,7 +95,7 @@
             // 
             // convertCSV
             // 
-            this.convertCSV.Location = new System.Drawing.Point(415, 88);
+            this.convertCSV.Location = new System.Drawing.Point(245, 383);
             this.convertCSV.Name = "convertCSV";
             this.convertCSV.Size = new System.Drawing.Size(75, 35);
             this.convertCSV.TabIndex = 4;
@@ -123,26 +122,9 @@
             // 
             this.filePath.Location = new System.Drawing.Point(12, 62);
             this.filePath.Name = "filePath";
-            this.filePath.Size = new System.Drawing.Size(477, 20);
+            this.filePath.Size = new System.Drawing.Size(274, 20);
             this.filePath.TabIndex = 1;
             this.filePath.TextChanged += new System.EventHandler(this.filePath_TextChanged);
-            // 
-            // resultsTest
-            // 
-            this.resultsTest.Location = new System.Drawing.Point(15, 137);
-            this.resultsTest.Name = "resultsTest";
-            this.resultsTest.Size = new System.Drawing.Size(271, 20);
-            this.resultsTest.TabIndex = 6;
-            this.resultsTest.TextChanged += new System.EventHandler(this.resultsTest_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 121);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(130, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Test dialogue - disposable";
             // 
             // dataGridView1
             // 
@@ -150,9 +132,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(534, 36);
+            this.dataGridView1.Location = new System.Drawing.Point(429, 36);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(772, 406);
+            this.dataGridView1.Size = new System.Drawing.Size(456, 457);
             this.dataGridView1.TabIndex = 8;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -162,9 +144,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Location = new System.Drawing.Point(15, 383);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 70);
             this.button1.TabIndex = 9;
-            this.button1.Text = "Load DGV1";
+            this.button1.Text = "Select statement to populate DataGrid";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -187,7 +169,7 @@
             // 
             // sendtoDB
             // 
-            this.sendtoDB.Location = new System.Drawing.Point(333, 236);
+            this.sendtoDB.Location = new System.Drawing.Point(186, 144);
             this.sendtoDB.Name = "sendtoDB";
             this.sendtoDB.Size = new System.Drawing.Size(100, 38);
             this.sendtoDB.TabIndex = 12;
@@ -202,25 +184,34 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Location = new System.Drawing.Point(96, 383);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(75, 70);
             this.button2.TabIndex = 13;
-            this.button2.Text = "Update DB";
+            this.button2.Text = "Sends hard coded update to DB";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click_2);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(12, 187);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(100, 37);
+            this.button3.TabIndex = 14;
+            this.button3.Text = "Generic Parser Test";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1318, 473);
+            this.ClientSize = new System.Drawing.Size(897, 505);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.sendtoDB);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.connStr);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.resultsTest);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.convertCSV);
             this.Controls.Add(this.preview);
@@ -250,14 +241,13 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox filePath;
-        private System.Windows.Forms.TextBox resultsTest;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox connStr;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button sendtoDB;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
