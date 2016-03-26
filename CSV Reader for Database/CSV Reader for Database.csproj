@@ -56,13 +56,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FieldType.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GenericParser.cs" />
+    <Compile Include="GenericParserAdapter.cs" />
     <Compile Include="MessageBoxHelper.cs" />
+    <Compile Include="ParserState.cs" />
+    <Compile Include="ParsingException.cs" />
     <Compile Include="previewCSV.cs">
       <SubType>Form</SubType>
     </Compile>

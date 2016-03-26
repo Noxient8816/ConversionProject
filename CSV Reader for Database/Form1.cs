@@ -77,6 +77,7 @@ namespace CSV_Reader_for_Database
             {
                 StreamReader csvFile = new StreamReader(filePath.Text);
                 var csvData = new CsvParser(csvFile);
+                csvData.Configuration.Quote = '\'';
                 //var row = csvData.Read();
                 dataGridView1.DataSource = DTAcctLog;
                 while (true)
@@ -99,8 +100,6 @@ namespace CSV_Reader_for_Database
                     }
 
                     DTAcctLog.Rows.Add(row);
-
-                    Debug.WriteLine("Row Length: {0:C2}\n Iteration: {1}", row.Length, i);
 
                     dataGridView1.Refresh(); //refresh the data grid view when you grab fresh data. 
                     sendtoDB.Show();
@@ -127,6 +126,7 @@ namespace CSV_Reader_for_Database
         {
             
             string connectionString = connStr.Text.Trim();
+            
             try
             {
 
@@ -253,32 +253,32 @@ namespace CSV_Reader_for_Database
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            string tabDelimiter = "\t";
-            string strID, strName, strStatus;
-            using (GenericParser parser = new GenericParser())
-            {
-                parser.SetDataSource(filePath.Text);
+        //private void button3_Click(object sender, EventArgs e)
+        //{
+        //    string tabDelimiter = "\t";
+        //    string strID, strName, strStatus;
+        //    using (GenericParser parser = new GenericParser())
+        //    {
+        //        parser.SetDataSource(filePath.Text);
 
-                parser.ColumnDelimiter = tabDelimiter.ToCharArray();
-                parser.FirstRowHasHeader = true;
-                //parser.SkipStartingDataRows = ;
-                parser.MaxBufferSize = 4096;
-                parser.MaxRows = 500;
-                parser.TextQualifier = '\"';
+        //        parser.ColumnDelimiter = tabDelimiter.ToCharArray();
+        //        parser.FirstRowHasHeader = true;
+        //        //parser.SkipStartingDataRows = ;
+        //        parser.MaxBufferSize = 4096;
+        //        parser.MaxRows = 500;
+        //        parser.TextQualifier = '\"';
 
-                while (parser.Read())
-                {
-                    strID = parser["ID"];
-                    strName = parser["Potato"];
-                    strStatus = parser["Reading"];
+        //        while (parser.Read())
+        //        {
+        //            strID = parser["ID"];
+        //            strName = parser["Potato"];
+        //            strStatus = parser["Reading"];
 
                     
-                }
+        //        }
 
 
-            }
-        }
+        //    }
+        //}
     }
 }
