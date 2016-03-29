@@ -21,9 +21,15 @@ namespace CSV_Reader_for_Database
         
         public Form1()
         {
-
             
             InitializeComponent();
+            ToolTip toolTip1 = new ToolTip();
+            //toolTip1.AutoPopDelay = 500;
+            toolTip1.InitialDelay = 5;
+            //toolTip1.ReshowDelay = 5;
+            toolTip1.SetToolTip(this.connStr, "Format:  eng=Database Name;uid=clubuser;pwd=Password;links=tcp");
+            toolTip1.ShowAlways = true;
+
             TheDataTables TDT = new TheDataTables();
             filePath.AutoCompleteSource = AutoCompleteSource.FileSystem;
             filePath.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -68,7 +74,7 @@ namespace CSV_Reader_for_Database
 
         private void button2_Click(object sender, EventArgs e) //assign elements button
         {
-            /*Need to add some sort of for each loop incorporating the CSV file that'll add a column for 
+           /*Need to add some sort of for each loop incorporating the CSV file that'll add a column for 
             each element of data. 
             */
             int i = 0;
@@ -102,7 +108,7 @@ namespace CSV_Reader_for_Database
                     DTAcctLog.Rows.Add(row);
 
                     dataGridView1.Refresh(); //refresh the data grid view when you grab fresh data. 
-                    sendtoDB.Show();
+                    
                 }
                 
                
@@ -115,6 +121,10 @@ namespace CSV_Reader_for_Database
                 MessageBox.Show("You fucked up\n" + ex.Message);
                 
             }
+            finally
+            {
+                button2.Show();
+            }
             //DTAcctLog.Rows.Add(1, 2);
             //git test
             //dataGridView1.Refresh(); //refresh the data grid view when you grab fresh data. 
@@ -122,38 +132,7 @@ namespace CSV_Reader_for_Database
 
 
         }
-        private void button2_Click_1(object sender, EventArgs e) //send to DB
-        {
-            
-            string connectionString = connStr.Text.Trim();
-            
-            try
-            {
-
-                using (SAConnection conn = new SAConnection(connectionString)) //DataTable Tester
-                {
-                    conn.Open();
-                    
-                    SADataAdapter da = new SADataAdapter("select * from acctlog", conn);
-                    SACommandBuilder cb = new SACommandBuilder(da);
-                    da.Fill(DTAcctLog);
-                    da.Update(DTAcctLog);
-
-
-
-
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBoxHelper.PrepToCenterMessageBoxOnForm(this);
-                MessageBox.Show("Error\n" + ex.Message);
-
-            }
-
-        }
+        
 
         private void filePath_TextChanged(object sender, EventArgs e)
         {
@@ -186,7 +165,14 @@ namespace CSV_Reader_for_Database
         
         private void button1_Click_1(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = null;
+            //dataGridView1.DataSource = null;
+
+            dataGridView1.ColumnCount = 0;
+            //Debug.WriteLine(potato);
+            //foreach (int value in dataGridView1.Columns.GetColumnCount)
+            {
+                dataGridView1.Columns.Clear();
+            }
             string connectionString = connStr.Text.Trim();
             try
             {
@@ -194,7 +180,7 @@ namespace CSV_Reader_for_Database
                 {
                     conn.Open(); //open connection from using block
                     SADataAdapter da = new SADataAdapter(); //create a new data adapter. I don't know what's special about this. 
-                    da.SelectCommand = new SACommand("Select * from AcctLog", conn);
+                    da.SelectCommand = new SACommand("Select top 1 * from AcctLog where 1=2", conn);
                     dataGridView1.DataSource = DTAcctLog;
                     SACommandBuilder cb = new SACommandBuilder(da);
                     da.Fill(DTAcctLog);
@@ -253,32 +239,14 @@ namespace CSV_Reader_for_Database
             }
         }
 
-        //private void button3_Click(object sender, EventArgs e)
-        //{
-        //    string tabDelimiter = "\t";
-        //    string strID, strName, strStatus;
-        //    using (GenericParser parser = new GenericParser())
-        //    {
-        //        parser.SetDataSource(filePath.Text);
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
 
-        //        parser.ColumnDelimiter = tabDelimiter.ToCharArray();
-        //        parser.FirstRowHasHeader = true;
-        //        //parser.SkipStartingDataRows = ;
-        //        parser.MaxBufferSize = 4096;
-        //        parser.MaxRows = 500;
-        //        parser.TextQualifier = '\"';
+        }
 
-        //        while (parser.Read())
-        //        {
-        //            strID = parser["ID"];
-        //            strName = parser["Potato"];
-        //            strStatus = parser["Reading"];
-
-                    
-        //        }
-
-
-        //    }
-        //}
+        private void toolTip1_Popup_1(object sender, PopupEventArgs e)
+        {
+            
+        }
     }
 }

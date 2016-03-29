@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.browsePath = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,19 +42,18 @@
             this.button1 = new System.Windows.Forms.Button();
             this.connStr = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.sendtoDB = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // browsePath
             // 
-            this.browsePath.Location = new System.Drawing.Point(211, 88);
+            this.browsePath.Location = new System.Drawing.Point(14, 88);
             this.browsePath.Name = "browsePath";
-            this.browsePath.Size = new System.Drawing.Size(75, 23);
-            this.browsePath.TabIndex = 0;
+            this.browsePath.Size = new System.Drawing.Size(75, 37);
+            this.browsePath.TabIndex = 2;
             this.browsePath.Text = "Browse";
             this.browsePath.UseVisualStyleBackColor = true;
             this.browsePath.Click += new System.EventHandler(this.button1_Click);
@@ -64,7 +64,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(897, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1129, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -85,7 +85,7 @@
             // 
             // preview
             // 
-            this.preview.Location = new System.Drawing.Point(12, 144);
+            this.preview.Location = new System.Drawing.Point(93, 88);
             this.preview.Name = "preview";
             this.preview.Size = new System.Drawing.Size(100, 37);
             this.preview.TabIndex = 3;
@@ -95,12 +95,13 @@
             // 
             // convertCSV
             // 
-            this.convertCSV.Location = new System.Drawing.Point(245, 383);
+            this.convertCSV.Location = new System.Drawing.Point(202, 256);
             this.convertCSV.Name = "convertCSV";
             this.convertCSV.Size = new System.Drawing.Size(75, 35);
             this.convertCSV.TabIndex = 4;
             this.convertCSV.Text = "Table Tree (Usable?)";
             this.convertCSV.UseVisualStyleBackColor = true;
+            this.convertCSV.Visible = false;
             this.convertCSV.Click += new System.EventHandler(this.convertCSV_Click);
             // 
             // openFileDialog1
@@ -122,7 +123,7 @@
             // 
             this.filePath.Location = new System.Drawing.Point(12, 62);
             this.filePath.Name = "filePath";
-            this.filePath.Size = new System.Drawing.Size(274, 20);
+            this.filePath.Size = new System.Drawing.Size(341, 20);
             this.filePath.TabIndex = 1;
             this.filePath.TextChanged += new System.EventHandler(this.filePath_TextChanged);
             // 
@@ -134,7 +135,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(429, 36);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(456, 457);
+            this.dataGridView1.Size = new System.Drawing.Size(688, 545);
             this.dataGridView1.TabIndex = 8;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -142,7 +143,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.Red;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(15, 383);
+            this.button1.Location = new System.Drawing.Point(13, 221);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 70);
             this.button1.TabIndex = 9;
@@ -152,7 +153,7 @@
             // 
             // connStr
             // 
-            this.connStr.Location = new System.Drawing.Point(15, 324);
+            this.connStr.Location = new System.Drawing.Point(15, 195);
             this.connStr.Name = "connStr";
             this.connStr.Size = new System.Drawing.Size(305, 20);
             this.connStr.TabIndex = 10;
@@ -161,46 +162,34 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 305);
+            this.label3.Location = new System.Drawing.Point(15, 176);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(338, 13);
+            this.label3.Size = new System.Drawing.Size(91, 13);
             this.label3.TabIndex = 11;
-            this.label3.Text = "ConnStr:  eng=Database Name;uid=clubuser;pwd=Password;links=tcp";
-            // 
-            // sendtoDB
-            // 
-            this.sendtoDB.Location = new System.Drawing.Point(186, 144);
-            this.sendtoDB.Name = "sendtoDB";
-            this.sendtoDB.Size = new System.Drawing.Size(100, 38);
-            this.sendtoDB.TabIndex = 12;
-            this.sendtoDB.Text = "Send Table to DB";
-            this.sendtoDB.UseVisualStyleBackColor = true;
-            this.sendtoDB.Visible = false;
-            this.sendtoDB.Click += new System.EventHandler(this.button2_Click_1);
+            this.label3.Text = "Connection String";
             // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(96, 383);
+            this.button2.Location = new System.Drawing.Point(278, 88);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 70);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Sends hard coded update to DB";
+            this.button2.Size = new System.Drawing.Size(75, 37);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Update DB";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click_2);
             // 
-            
-            
+            // toolTip1
+            // 
+            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 505);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(1129, 593);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.sendtoDB);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.connStr);
             this.Controls.Add(this.button1);
@@ -238,9 +227,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox connStr;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button sendtoDB;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
