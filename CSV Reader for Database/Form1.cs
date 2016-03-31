@@ -100,7 +100,7 @@ namespace CSV_Reader_for_Database
                     
                    while (i < row.Length)
                     {
-                        DTAcctLog.Columns.Add(String.Format("Column {0}", (i + 1))); //fancy way of doing it.
+                        DTAcctLog.Columns.Add(String.Format("Array Element {0}", (i))); //fancy way of doing it.
                         //DTAcctLog.Columns.Add("Column " + (i+1)); //what I did originally and still works fine for this application
                         i++;
                     }
@@ -165,9 +165,9 @@ namespace CSV_Reader_for_Database
         
         private void button1_Click_1(object sender, EventArgs e)
         {
-            //dataGridView1.DataSource = null;
-
-            dataGridView1.ColumnCount = 0;
+            DTAcctLog.Clear();
+            
+            
             //Debug.WriteLine(potato);
             //foreach (int value in dataGridView1.Columns.GetColumnCount)
             {
@@ -209,18 +209,16 @@ namespace CSV_Reader_for_Database
 
                 using (SAConnection conn = new SAConnection(connectionString)) //DataSet tester
                 {
-                    DTAcctLog.Rows.Clear(); //doesn't affect the update.
+                    DTAcctLog.Clear(); //doesn't affect the update.
                     conn.Open(); //open connection from using block
                     SADataAdapter da = new SADataAdapter("Select * from acctlog", conn); //create a new data adapter. I don't know what's special about this. 
                     SACommandBuilder cb = new SACommandBuilder(da);
                     cb.ConflictOption = ConflictOption.OverwriteChanges; //cheaty bullshit for just overpowering the conflict changes negating the concurrency violation.
                     da.Fill(DTAcctLog); //you have to fill it to update it. 
-                    DTAcctLog.Rows[0]["unique_id"] = 1;
-                    DTAcctLog.Rows[0]["repuid"] = 2000032;
-                    DTAcctLog.Rows[0]["memid"] = 200001159;
-                    //DTAcctLog.Rows[0]["start_time"] = "2015-08-17 08:44:23.052";
-                    //DTAcctLog.Rows[0]["repuid"] = 2000017;
-                    //DTAcctLog.Rows[0]["repuid"] = 2000025;
+                    //DTAcctLog.Rows[0]["unique_id"] = 1;
+                    //DTAcctLog.Rows[0]["repuid"] = 2000001; 
+                    //DTAcctLog.Rows[3]["repuid"] = 2000004; The value of the array (Rows[3]) will indicate which row to update. Starts at 0.
+
                     da.UpdateCommand = cb.GetUpdateCommand();
                     da.Update(DTAcctLog);
                     DTAcctLog.AcceptChanges();
@@ -247,6 +245,11 @@ namespace CSV_Reader_for_Database
         private void toolTip1_Popup_1(object sender, PopupEventArgs e)
         {
             
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            label2.Text = DTAcctLog.ToString();
         }
     }
 }
