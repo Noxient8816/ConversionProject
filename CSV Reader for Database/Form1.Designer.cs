@@ -47,9 +47,10 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -92,11 +93,11 @@
             // 
             // preview
             // 
-            this.preview.Location = new System.Drawing.Point(99, 88);
+            this.preview.Location = new System.Drawing.Point(99, 131);
             this.preview.Name = "preview";
             this.preview.Size = new System.Drawing.Size(100, 37);
             this.preview.TabIndex = 3;
-            this.preview.Text = "Read from CSV @ File Path";
+            this.preview.Text = "Read Entire CSV";
             this.preview.UseVisualStyleBackColor = true;
             this.preview.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -140,7 +141,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(372, 36);
+            this.dataGridView1.Location = new System.Drawing.Point(373, 39);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(745, 545);
             this.dataGridView1.TabIndex = 8;
@@ -165,6 +166,7 @@
             this.connStr.Size = new System.Drawing.Size(305, 20);
             this.connStr.TabIndex = 10;
             this.connStr.Text = "eng=Noxient;uid=clubuser;pwd=sneaky4snook;links=tcp";
+            this.connStr.TextChanged += new System.EventHandler(this.connStr_TextChanged);
             // 
             // label3
             // 
@@ -211,9 +213,8 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label5);
@@ -226,15 +227,14 @@
             this.panel1.Size = new System.Drawing.Size(326, 260);
             this.panel1.TabIndex = 14;
             // 
-            // label2
+            // label5
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "label2";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(4, 68);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "label5";
             // 
             // label4
             // 
@@ -245,20 +245,32 @@
             this.label4.TabIndex = 15;
             this.label4.Text = "label4";
             // 
-            // label5
+            // label2
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 68);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "label5";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(4, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "label2";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(99, 88);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(100, 37);
+            this.button5.TabIndex = 15;
+            this.button5.Text = "Peek";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1129, 593);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
@@ -308,6 +320,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button5;
     }
 }
 

@@ -28,6 +28,7 @@ namespace CSV_Reader_for_Database
             toolTip1.InitialDelay = 5;
             //toolTip1.ReshowDelay = 5;
             toolTip1.SetToolTip(this.connStr, "Format:  eng=Database Name;uid=clubuser;pwd=Password;links=tcp");
+            toolTip1.SetToolTip(this.button5, "Call 1 row from CSV");
             toolTip1.ShowAlways = true;
 
             TheDataTables TDT = new TheDataTables();
@@ -74,9 +75,11 @@ namespace CSV_Reader_for_Database
 
         private void button2_Click(object sender, EventArgs e) //assign elements button
         {
-           /*Need to add some sort of for each loop incorporating the CSV file that'll add a column for 
-            each element of data. 
-            */
+            /*Need to add some sort of for each loop incorporating the CSV file that'll add a column for 
+             each element of data. 
+             */
+            DTAcctLog.Columns.Clear();
+            DTAcctLog.Rows.Clear();
             int i = 0;
             
             try
@@ -165,9 +168,10 @@ namespace CSV_Reader_for_Database
         
         private void button1_Click_1(object sender, EventArgs e)
         {
-            DTAcctLog.Clear();
-            
-            
+            DTAcctLog.Columns.Clear();
+            DTAcctLog.Rows.Clear();
+
+
             //Debug.WriteLine(potato);
             //foreach (int value in dataGridView1.Columns.GetColumnCount)
             {
@@ -203,19 +207,21 @@ namespace CSV_Reader_for_Database
 
         private void button2_Click_2(object sender, EventArgs e)
         {
+            DTAcctLog.Columns.Clear();
+            DTAcctLog.Rows.Clear();
             string connectionString = connStr.Text.Trim();
             try
             {
 
                 using (SAConnection conn = new SAConnection(connectionString)) //DataSet tester
                 {
-                    DTAcctLog.Clear(); //doesn't affect the update.
+                    
                     conn.Open(); //open connection from using block
                     SADataAdapter da = new SADataAdapter("Select * from acctlog", conn); //create a new data adapter. I don't know what's special about this. 
                     SACommandBuilder cb = new SACommandBuilder(da);
                     cb.ConflictOption = ConflictOption.OverwriteChanges; //cheaty bullshit for just overpowering the conflict changes negating the concurrency violation.
                     da.Fill(DTAcctLog); //you have to fill it to update it. 
-                    //DTAcctLog.Rows[0]["unique_id"] = 1;
+                    DTAcctLog.Rows[0]["unique_id"] = 1;
                     //DTAcctLog.Rows[0]["repuid"] = 2000001; 
                     //DTAcctLog.Rows[3]["repuid"] = 2000004; The value of the array (Rows[3]) will indicate which row to update. Starts at 0.
 
@@ -249,7 +255,61 @@ namespace CSV_Reader_for_Database
 
         private void label2_Click(object sender, EventArgs e)
         {
-            label2.Text = DTAcctLog.ToString();
+            //DataColumn col0 = DTAcctLog.Columns{ get; }
+            //DTAcctLog.co
+            //label2.Text = col0;
+            
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DTAcctLog.Columns.Clear();
+            DTAcctLog.Rows.Clear();
+            int i = 0;
+
+            try
+            {
+                StreamReader csvFile = new StreamReader(filePath.Text);
+                var csvData = new CsvParser(csvFile);
+                csvData.Configuration.Quote = '\'';
+                //var row = csvData.Read();
+                dataGridView1.DataSource = DTAcctLog;
+                var row = csvData.Read();
+                while (i < row.Length)
+                    {
+                        DTAcctLog.Columns.Add(String.Format("Array Element {0}", (i))); //fancy way of doing it.
+                        //DTAcctLog.Columns.Add("Column " + (i+1)); //what I did originally and still works fine for this application
+                        i++;
+                    }
+
+                    DTAcctLog.Rows.Add(row);
+
+                    dataGridView1.Refresh(); //refresh the data grid view when you grab fresh data. 
+
+               
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBoxHelper.PrepToCenterMessageBoxOnForm(this);
+                MessageBox.Show("You fucked up\n" + ex.Message);
+
+            }
+            finally
+            {
+                button2.Show();
+            }
+            //DTAcctLog.Rows.Add(1, 2);
+            //git test
+            //dataGridView1.Refresh(); //refresh the data grid view when you grab fresh data. 
+        }
+
+        private void connStr_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
